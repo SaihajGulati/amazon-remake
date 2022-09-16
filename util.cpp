@@ -15,17 +15,33 @@ std::string convToLower(std::string src)
     to a set of words based on the criteria given in the assignment **/
 std::set<std::string> parseStringToWords(string rawWords)
 {
+    set<string> words;
+    int left = 0;
+    for (long unsigned int i = 0; i < rawWords.length(); i++)
+    {
+        char curr = rawWords[i];
 
-
-
-
-
-
-
-
-
+         //if not a letter, check if long enough (2 characters and then decide whether to put in set)
+         //regardless of whether long enough, start of next is one character after i
+        if (curr < 48 || (curr > 57 && curr < 65) || (curr > 90 && curr <=97) || curr > 122)
+        {
+            if (i - left > 1)
+            {
+                string word = convToLower(rawWords.substr(left, i - left));
+                words.insert(word);
+            }
+            left = i + 1;
+        }
+    }
+    if (rawWords.length() - left > 1)
+    {
+        words.insert(rawWords.substr(left, rawWords.length() - left));
+    }
+    
+    return words;
 
 }
+
 
 /**************************************************
  * COMPLETED - You may use the following functions
