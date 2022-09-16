@@ -39,11 +39,9 @@ std::set<std::string> Book::keywords() const
 std::string Book::displayString() const
 {
     return 
-    "Name: " + name_ + "\n" +
-    "Price: " + std::to_string(price_) + "\n" +
-    "Quantity: " + std::to_string(qty_) + "\n" +
-    "ISBN: " + isbn_ + "\n" +
-    "Author: " + author_ + "\n";
+    name_ + "\n" +
+    "Author: " + author_ + " ISBN: " + isbn_ + "\n" +
+    std::to_string(price_) + " " + std::to_string(qty_) + " left.";
 }
 
 /**
@@ -52,6 +50,5 @@ std::string Book::displayString() const
 void Book::dump(std::ostream& os) const
 {
     Product::dump(os);
-    os << isbn_ << "\n" << author_ << "\n" << price_ << "\n" << qty_ << endl;
-
+    os << isbn_ << "\n" << author_ << endl;
 }

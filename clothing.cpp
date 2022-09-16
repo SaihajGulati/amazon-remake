@@ -33,11 +33,9 @@ std::set<std::string> Clothing::keywords() const
 std::string Clothing::displayString() const
 {
     return 
-    "Name: " + name_ + "\n" +
-    "Price: " + std::to_string(price_) + "\n" +
-    "Quantity: " + std::to_string(qty_) + "\n" +
-    "Size: " + size_ + "\n" +
-    "Brand: " + brand_ + "\n";
+    name_ + "\n" +
+    "Size: " + size_ + " Brand: " + brand_ + "\n" +
+    std::to_string(price_) + " " + std::to_string(qty_) + " left.";
 }
 
 /**
