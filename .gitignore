@@ -1,0 +1,11 @@
+tester.cpp
+book.o
+clothing.o
+movie.o
+product_parser.o
+test
+test.dSYM/
+util.h.gch
+.vscode/
+amazon.o
+mydatastore.o
