@@ -49,6 +49,7 @@ std::string Book::displayString() const
  */
 void Book::dump(std::ostream& os) const
 {
+    //dump the product version first and then add category specific
     Product::dump(os);
     os << isbn_ << "\n" << author_ << endl;
 }

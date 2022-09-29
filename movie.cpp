@@ -40,6 +40,7 @@ std::string Movie::displayString() const
  */
 void Movie::dump(std::ostream& os) const
 {
+    //dump the product version first and then add category specific
     Product::dump(os);
     os << genre_ << "\n" << rating_ << endl;
 }

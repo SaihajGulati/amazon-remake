@@ -43,6 +43,7 @@ std::string Clothing::displayString() const
  */
 void Clothing::dump(std::ostream& os) const
 {
+    //dump the product version first and then add category specific
     Product::dump(os);
     os << size_ << "\n" << brand_ << endl;
 }
