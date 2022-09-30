@@ -9,3 +9,11 @@ util.h.gch
 .vscode/
 amazon.o
 mydatastore.o
+*.o
+amazon
+amazon
+db.txt
+db2.txt
+db3.txt
+testercopy.cpp
+testing

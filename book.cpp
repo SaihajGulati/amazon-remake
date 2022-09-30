@@ -1,5 +1,7 @@
 #include "book.h"
 #include "util.h"
+#include <sstream>
+#include <iomanip>
 using namespace std;
 
 /**
@@ -12,6 +14,8 @@ Book::Book(const std::string name, double price, int qty, const std::string isbn
     author_(author)
 {
 }
+
+Book::~Book(){}
 
 /**
  * Returns the appropriate keywords that this product should be associated with
@@ -38,10 +42,11 @@ std::set<std::string> Book::keywords() const
  */
 std::string Book::displayString() const
 {
-    return 
-    name_ + "\n" +
-    "Author: " + author_ + " ISBN: " + isbn_ + "\n" +
-    std::to_string(price_) + " " + std::to_string(qty_) + " left.";
+    std::stringstream ss;
+    ss << name_ + "\n";
+    ss << "Author: " + author_ + " ISBN: " + isbn_ + "\n";
+    ss << std::fixed << std::setprecision(2) << price_ << " " << qty_ << " left.";
+    return ss.str();
 }
 
 /**

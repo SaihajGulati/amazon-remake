@@ -1,5 +1,4 @@
 #include "mydatastore.h"
-#include "product_parser.h"
 #include "util.h"
 
 using namespace std;
@@ -53,6 +52,7 @@ vector<Product*> MyDataStore::search(std::vector<std::string>& terms, int type)
     if (type == 1)
     {
         //for each term, get the set of products and find its union with the current running set
+        
         for (it = terms.begin(); it != terms.end(); ++it)
         {
             temp = setUnion(temp, keywordProducts_[*it]);
@@ -64,12 +64,21 @@ vector<Product*> MyDataStore::search(std::vector<std::string>& terms, int type)
         //for each term, get the set of products and find its intersection with the current set
         for (it = terms.begin(); it != terms.end(); ++it)
         {
-            temp = setIntersection(temp, keywordProducts_[*it]);
+            //have to handle case that is the first term, in which case need to do union, as intersection would do nothing as need to add to set even though temp is empty 
+            if (it == terms.begin())
+            {
+                temp = setUnion(temp, keywordProducts_[*it]);
+            }
+            else
+            {
+                temp = setIntersection(temp, keywordProducts_[*it]);
+            }
         }
     }
 
     //assign to vector of master set of products that match search criteria
     lastSearchHits_.assign(temp.begin(), temp.end());
+    std::sort(lastSearchHits_.begin(), lastSearchHits_.end(), ProdNameSort());
     return lastSearchHits_;
 }
 

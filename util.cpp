@@ -23,19 +23,18 @@ std::set<std::string> parseStringToWords(string rawWords)
 
          //if not a letter, check if long enough (2 characters and then decide whether to put in set)
          //regardless of whether long enough, start of next is one character after i
-        if (curr < 48 || (curr > 57 && curr < 65) || (curr > 90 && curr <=97) || curr > 122)
+        if (curr < 48 || (curr > 57 && curr < 65) || (curr > 90 && curr < 97) || curr > 122)
         {
             if (i - left > 1)
             {
-                string word = convToLower(rawWords.substr(left, i - left));
-                words.insert(word);
+                words.insert(convToLower(rawWords.substr(left, i - left)));
             }
             left = i + 1;
         }
     }
     if (rawWords.length() - left > 1)
     {
-        words.insert(rawWords.substr(left, rawWords.length() - left));
+        words.insert(convToLower(rawWords.substr(left, rawWords.length() - left)));
     }
     
     return words;

@@ -23,9 +23,28 @@ Hidden Figures DVD
 1
 Drama
 PG
+book
+Hidden Figures
+0
+1
+978-00001000-1
+Bob Ross
+clothing
+Hi
+1.799
+10
+Small
+Guess
+movie
+34
+1179.99
+1
+Horror
+R
 </products>
 <users>
 aturing 100.00 0
 johnvn 50.00 1
 adal 120.00 1
+54 11.00 0
 </users>

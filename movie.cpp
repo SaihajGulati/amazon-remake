@@ -1,13 +1,18 @@
 #include "movie.h"
 #include "util.h"
+#include <iomanip>
+#include <sstream>
+
 using namespace std;
 
 Movie::Movie(const std::string name, double price, int qty, const std::string genre, const std::string rating) :
-    Product("book", name, price, qty),
+    Product("movie", name, price, qty),
     genre_(genre),
     rating_(rating)
 {
 }
+
+Movie::~Movie(){}
 
 /**
  * Returns the appropriate keywords that this product should be associated with
@@ -18,7 +23,7 @@ std::set<std::string> Movie::keywords() const
     set<std::string> words(parseStringToWords(name_));
 
     //insert rest of keywords that we take as is
-    words.insert(genre_);
+    words.insert(convToLower(genre_));
 
     return words;   
 
@@ -29,10 +34,11 @@ std::set<std::string> Movie::keywords() const
  */
 std::string Movie::displayString() const
 {
-    return 
-    name_ + "\n" +
-    "Genre: " + genre_ + " Rating: " + rating_ + "\n" +
-    std::to_string(price_) + " " + std::to_string(qty_) + " left.";
+    std::stringstream ss;
+    ss << name_ << "\n";
+    ss << "Genre: " << genre_ << " Rating: " << rating_ << "\n";
+    ss << std::fixed << std::setprecision(2) << price_ << " " << qty_ << " left.";
+    return ss.str();
 }
 
 /**

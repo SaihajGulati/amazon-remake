@@ -1,13 +1,18 @@
 #include "clothing.h"
 #include "util.h"
+#include <iomanip>
+#include <sstream>
+
 using namespace std;
 
 Clothing::Clothing(const std::string name, double price, int qty, const std::string size, const std::string brand) :
-    Product("book", name, price, qty),
+    Product("clothing", name, price, qty),
     size_(size),
     brand_(brand)
 {
 }
+
+Clothing::~Clothing(){}
 
 /**
  * Returns the appropriate keywords that this product should be associated with
@@ -32,10 +37,11 @@ std::set<std::string> Clothing::keywords() const
  */
 std::string Clothing::displayString() const
 {
-    return 
-    name_ + "\n" +
-    "Size: " + size_ + " Brand: " + brand_ + "\n" +
-    std::to_string(price_) + " " + std::to_string(qty_) + " left.";
+    std::stringstream ss;
+    ss << name_ << "\n";
+    ss << "Size: " << size_ << " Brand: " << brand_ << "\n";
+    ss << std::fixed << std::setprecision(2) << price_ << " " << qty_ << " left.";
+    return ss.str();
 }
 
 /**
