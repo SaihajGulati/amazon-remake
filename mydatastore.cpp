@@ -10,11 +10,12 @@ MyDataStore::MyDataStore()
 MyDataStore::~MyDataStore()
 {
     std::map<std::string, User*>::iterator it;
+    //delete memory taken up by user objects
     for (it = users_.begin(); it != users_.end(); ++it)
     {
         delete it->second;
     }
-
+    //delete memory taken up by product objects
     std::vector<Product*>::iterator it2;
     for (it2 = products_.begin(); it2 != products_.end(); ++it2)
     {
@@ -196,14 +197,14 @@ bool MyDataStore::buyCart(std::string username)
         //make aliases to parts stored in maps so can use easier but also change the originals
         //alias for cart of specific user, need alias bc otherwise will copy vector
         vector<Product*>& cart = carts_[username];
-        //alias for user pointer
+        //user pointer
         User* user = users_[username];
 
         // go through cart and handle each cart item
         vector<Product*>::iterator it = cart.begin();
         while (it != cart.end())
         {
-            //alias for product pointer in cart
+            //product pointer in cart
             Product* item = (*it);
 
             //check if have stock and user has enough money
