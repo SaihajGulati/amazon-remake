@@ -71,6 +71,7 @@ private:
     std::map<std::string, User*> users_;
     std::map<std::string, std::vector<Product*>> carts_;
     std::vector<Product*> lastSearchHits_;
+    std::vector<Product*> products_;
     
 };
 

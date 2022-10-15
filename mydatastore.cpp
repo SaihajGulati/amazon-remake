@@ -7,7 +7,20 @@ MyDataStore::MyDataStore()
 {
 }
 
-MyDataStore::~MyDataStore(){}
+MyDataStore::~MyDataStore()
+{
+    std::map<std::string, User*>::iterator it;
+    for (it = users_.begin(); it != users_.end(); ++it)
+    {
+        delete it->second;
+    }
+
+    std::vector<Product*>::iterator it2;
+    for (it2 = products_.begin(); it2 != products_.end(); ++it2)
+    {
+        delete *it2;
+    }
+}
 
 /**
  * Adds a product to the data store
@@ -23,6 +36,8 @@ void MyDataStore::addProduct(Product* p)
     {
         keywordProducts_[*it].insert(p);
     }
+
+    products_.push_back(p);
 }
 
 
@@ -33,8 +48,6 @@ void MyDataStore::addProduct(Product* p)
 void MyDataStore::addUser(User* u)
 {
     users_[convToLower(u->getName())] = u;
-    vector<Product*> cartTemp;
-    carts_[convToLower(u->getName())] = cartTemp;
 }
 
 
@@ -181,17 +194,17 @@ bool MyDataStore::buyCart(std::string username)
     if (users_.find(username) != users_.end())
     {
         //make aliases to parts stored in maps so can use easier but also change the originals
-        //alias for cart of specific user
+        //alias for cart of specific user, need alias bc otherwise will copy vector
         vector<Product*>& cart = carts_[username];
         //alias for user pointer
-        User*& user = users_[username];
+        User* user = users_[username];
 
         // go through cart and handle each cart item
         vector<Product*>::iterator it = cart.begin();
         while (it != cart.end())
         {
             //alias for product pointer in cart
-            Product*& item = (*it);
+            Product* item = (*it);
 
             //check if have stock and user has enough money
             if (item->getQty() > 0 && user->getBalance() >= item->getPrice())
